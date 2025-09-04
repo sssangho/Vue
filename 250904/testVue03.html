@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <img src="face1.png">직접 지정 </img>
+        <hr>
+        <img v-bind:src="fff">바인딩</img>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                fff: "face2.png"
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

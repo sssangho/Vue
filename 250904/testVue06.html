@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <label><input type="checkbox" value="red" v-model="myChecks">적</label><br>
+        <label><input type="checkbox" value="green" v-model="myChecks">녹</label><br>
+        <label><input type="checkbox" value="blue" v-model="myChecks">청</label><br>
+        선택한 색은 {{myChecks}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                myChecks: []
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{aaa}}</p>
+        <p v-text="aaa"></p>
+        <p>{{bbb}}</p>
+        <p v-html="bbb"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                aaa: "안녕 뷰~",
+                bbb: "<h1>안녕 뷰~</h1>"
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

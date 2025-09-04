@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <li v-for="(item, index) in objArray">{{index + 1}} : {{item.name}} - {{item.price}}원</li>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                objArray: [
+                    { name: "찐빵", price: 1000 },
+                    { name: "멜론크림빵", price: 2800 },
+                    { name: "크로와상", price: 2500 }
+                ]
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
