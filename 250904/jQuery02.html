@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p id="on">On</p>
+        <p id="off">Off</p>
+        <button>ON/OFF전환</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        let $on = $('#on');
+        let $off = $('#off');
+        let isOn = false;
+        $on.hide();
+        $('button').on('click', function () {
+            isOn = !isOn
+            if (isOn) {
+                $on.show();
+                $off.hide();
+            } else {
+                $on.hide();
+                $off.show();
+            }
+        });
+    </script>
+</body>
+
+</html>
