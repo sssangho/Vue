@@ -15,5 +15,13 @@
       "title": "봉골레파스타",
       "completed": false
     }
+  ],
+  "members": [
+    {
+      "id": "3fd1",
+      "username": "땅호리",
+      "email": "sangho353@naver.com",
+      "password": "1234"
+    }
   ]
 }
