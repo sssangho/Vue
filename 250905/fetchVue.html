@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js ToDoList (CRUD + Fetch - Arrow Functions)</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>📝 ToDo List (CRUD + Fetch)</h1>
+    <div>
+      <input type="text" v-model="newTask" @keyup.enter="createTask" placeholder="할 일을 입력하세요">
+      <button @click="createTask">추가</button>
+    </div>
+    <ul>
+      <li v-for="task in tasks" :key="task.id">
+        <div>
+          <input type="checkbox" v-model="task.completed" @change="updateTask(task)">
+          <span :class="{ completed: task.completed }" @dblclick="editTask(task)">
+            {{ task.title }}
+          </span>
+        </div>
+        <div>
+          <button @click="deleteTask(task.id)">삭제</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        newTask: '',
+        tasks: []
+      },
+      methods: {
+        async fetchTasks() {
+          try {
+            const res = await fetch('http://localhost:3000/todos');
+            const data = await res.json();
+            this.tasks = data;
+          } catch (e) {
+            console.error('GET 오류:', e);
+          }
+        },
+        async createTask() {
+          const title = this.newTask.trim();
+          if (!title) return;
+          try {
+            const res = await fetch('http://localhost:3000/todos', {
+              method: 'POST',
+              headers: { 'Contet-Type': 'application/json; charset=UTF-8' },
+              body: JSON.stringify({ title, completed: false })
+            });
+            const newTodo = await res.json();
+            this.tasks.unshift(newTodo);
+            this.newTask = '';
+          } catch (e) {
+            console.error('POST 오류:', e);
+          }
+        },
+        async updateTask(task) {
+          try {
+            await fetch(`http://localhost:3000/todos/${task.id}`, {
+              method: 'PUT',
+              headers: { 'Contet-Type': 'application/json; charset=UTF-8' },
+              body: JSON.stringify(task)
+            });
+          } catch (e) {
+            console.error('PUT 오류:', e);
+          }
+        },
+        editTask(task) {
+          const newTitle = prompt('할 일을 수정하세요:', task.title);
+          if (newTitle !== null) {
+            task.title = newTitle.trim();
+            this.updateTask(task);
+          }
+        },
+        async deleteTask(id) {
+          try {
+            await fetch(`http://localhost:3000/todos/${id}`, {
+              method: 'DELETE',
+            });
+            this.tasks = this.tasks.filter(t => t.id !== id);
+          } catch (e) {
+            console.error('DELETE 오류:', e);
+          }
+        }
+      },
+      mounted() {
+        this.fetchTasks();
+      }
+    });
+  </script>
+</body>
+
+</html>
