@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        fetch('http://localhost:3000/todos', {
+            method: 'post',
+            headers: { 'Contetn-Type': 'application/json; charset=UTF-8' },
+            body: JSON.stringify({ title: '새로운 할 일', completed: false })
+        })
+            .then(res => res.json())
+            .then(data => console.log('응답:', data))
+            .catch(e => console.error('에러:', e));
+    </script>
+</body>
+
+</html>
